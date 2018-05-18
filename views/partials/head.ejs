@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>IDT - Atletismo</title>
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="datatables/datatables.min.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/sweetalert2.min.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<header>
+				<div class="container">
+				<div class="row text-center align-items-center">
+					<div class="col-12 col-md-5">
+						<a href="/"><img src="img/idt.png" alt="Logo IDT"></a>
+					</div>
+					<div class="col-12 col-md-7">
+						<h1>Sistema de Atletismo</h1>
+					</div>
+				</div>
+				</div>
+
+		</header>
+
+			<nav style="background-color: #e9ecef;">
+				<ul class="breadcrumb container">
+				<% for(var i=0; i<breadcrumb.length; i++){
+				if(i==breadcrumb.length-1){ %>
+				<li class="breadcrumb-item active">
+					<a class="text-uppercase">
+						<% if(i==0){ %>
+						Inicio
+						<% }else{ %>
+						<%= breadcrumb[i].label %>
+						<% } %>	
+						</a>
+				</li>
+			
+				<%}else{%>
+
+				<li class="breadcrumb-item">
+					<a class="text-uppercase" href="<%= breadcrumb[i].url %>">
+						<% if(i==0){ %>
+						Inicio
+						<% }else{ %>
+						<%= breadcrumb[i].label %>
+						<% } %>	
+						</a>
+				</li>
+			<%} }%>
+			</ul>
+		</nav>

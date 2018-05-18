@@ -1,0 +1,67 @@
+<% include ../../partials/head %>
+
+<div class="title text-center">
+	<h1>COMPETIDORES</h1>
+</div>
+
+
+
+<% include crear %>
+<% include modificar %>
+
+<div class="container">
+
+	<div class="table-title">
+		<div class="row">
+			<div class="col-sm-8"><h1><b>Listado De Atletas</b></h1></div>
+			<div class="col-12 col-md-4">
+				<button href="#addEmployeeModal" data-toggle="modal" type="button" class="btn btn-success btn-lg"><i class="fa fa-plus"></i> Agregar Nuevo</button> 
+			</div>
+		</div>
+	</div>
+
+	<div class="table-responsive  text-center" > 
+
+		<table class="table table-striped table-bordered table-fixed display" id="myTable1" cellspacing="0" >
+
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Cedula</th>
+					<th scope="col">Nombre </th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Club/Equipo</th>
+					<th>Accion</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<% for(var i=0; i<dataAtletas.length; i++) {%>
+				<tr>
+
+					<td class="idAtleta"><%= dataAtletas[i]['id'] %></td>
+					<td ><%= dataAtletas[i]['cedula'] %></td>
+					<td><%= dataAtletas[i]['primer_nombre'] %></td>
+					<td><%= dataAtletas[i]['primer_apellido'] %></td>
+					<td><%=dataAtletas[i]['nombre_club'] %></td>
+
+					<td class="d-flex align-items-center justify-content-center">
+						<form action="/gestionar/atleta/modificar" class="modiAtle" > 
+							<input type="hidden" id="atleta_id" name="atleta_id" value="<%= dataAtletas[i]['id']%>">
+							<input type="submit" class="btn btn-primary" href="#atletamodificar" data-toggle="modal" id="editarS" value="Editar" >  
+						</form>  
+						<form  method="post" action="/gestionar/atleta/eliminar/<%= dataAtletas[i]['cedula'] %>" class="eliminarAtle" > 
+							<button type="submit" class="btn btn-danger" name="delete"  onClick="return confirm('¿Quieres eliminar el Atleta?')">Eliminar</button>
+						</form>
+					</td>
+				</tr>
+				<% } %>
+
+			</tbody>
+		</table>
+	</div>
+
+
+</div>
+<% include ../../partials/foot %>

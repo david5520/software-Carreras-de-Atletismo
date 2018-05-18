@@ -1,0 +1,101 @@
+<% include ../partials/head %>
+
+<div class="content-carreras">
+
+	<div class="title text-center">
+		<h1>COMPETENCIA - MODIFICAR</h1>
+	</div>
+
+	<div class="container">
+		<div class="form-wrapper">
+			<div class="form form--step2">
+				<form class="text-center" action="/competencia/modificar" id="editCompe">
+
+					<div class="row">
+						<div class="col-md-3 info-carrera"><input type="text" class="form-control" name="nombre" value="<%= datosCompe[0]['nombre']%>" required>
+						</div>
+						<div class="col-md-3 info-carrera"><input type="text" class="form-control" name="lugar" value="<%= datosCompe[0]['lugar']%>" required></div>
+						<div class="col-md-3 info-carrera"><input type="date" class="form-control" name="fecha" value="<%= datosCompe[0]['fecha']%>" required></div>
+						<div class="col-md-3 info-carrera"><input type="time" class="form-control" name="hora" value="<%= datosCompe[0]['hora']%>" required></div>
+					</div>		
+					<input type="hidden" name="id" value="<%= datosCompe[0]['id']%>">
+
+					<div class="table-responsive">
+
+						<table class="table table-striped table-bordered table-fixed display" style="width:100%" id="myTable" cellspacing="0" width="100%">
+
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Numero</th>
+									<th scope="col">Cedula</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellido</th>
+									<th scope="col">Club</th>
+									<th scope="col">Categoría</th>
+								</tr>
+							</thead>
+							<tbody>
+
+
+
+								<% for(var i=0; i<datosAtletas.length; i++) {
+									for(var j=0; j<datosCompeAtleta.length; j++) {
+										if(datosAtletas[i]['id']==datosCompeAtleta[j].id_atleta){ %>
+								<tr class="selected">
+									<%	j=datosCompeAtleta.length;
+									}else{
+										if(j==datosCompeAtleta.length-1){%>
+								<tr>
+									<% } } } %> 
+
+
+									<th scope="row" class="idCompetidor"><%= datosAtletas[i]['id'] %></th>
+									<td class="numCompetidor">
+
+										<% for(var j=0; j<datosCompeAtleta.length; j++) {
+											if(datosAtletas[i]['id']==datosCompeAtleta[j].id_atleta){ %>
+
+										<input type="number" class="numCompetidor" value="<%= datosCompeAtleta[j]['numero_atleta']%>">
+									</td>
+									<% 	j=datosCompeAtleta.length;
+									}else{
+										if(j==datosCompeAtleta.length-1){%>
+
+									<input type="number" class="numCompetidor" value="">
+							</td>
+							<% } } } %> 
+
+
+
+							<td><%= datosAtletas[i]['cedula'] %></td>
+							<td><%= datosAtletas[i]['primer_nombre'] %></td>
+							<td><%= datosAtletas[i]['primer_apellido'] %></td>
+							<td><%= datosAtletas[i]['club_nombre'] %></td>
+							<td><%= datosAtletas[i]['categoria'] %>-<%= datosAtletas[i]['sexo'][0] %></td>
+							</tr>
+						<% } %>
+						</tbody>
+					</table>
+			</div>
+
+			<div id="inputs">
+
+			</div>
+
+			<div class="btn-container">
+				<a href="../listar" class="btn btn-secondary btn-lg btn-back">Regresar</a>
+				<button type="submit" class="btn btn-success btn-lg btn-save">Guardar</button>
+			</div>
+
+			</form>
+	</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+<% include ../partials/foot %>

@@ -1,0 +1,83 @@
+<div id="atletamodificar" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <form class="text-center" action="/gestionar/atleta/modificar" method="post" id="modificarAtle"> 
+          <div class="modal-header">            
+            <h4 class="modal-title">Modificar un Atleta</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn-can" >&times;</button>
+          </div>
+          <div class="modal-body"> 
+        
+            <div class="form-group row align-items-center">
+               <label for="inputNombre1Atleta" class="col-md-4 col-form-label">Primer Nombre:</label>
+            <div class="col-md-8">
+                  <input type="text" class="form-control" name="primer_nombre" id="Pnombre" required>
+              </div>
+            </div>
+            <div class="form-group row align-items-center">
+               <label for="inputNombre2Atleta" class="col-md-4 col-form-label">Segundo Nombre:</label>
+            <div class="col-md-8">
+                  <input type="text" class="form-control" name="segundo_nombre" id="Snombre" >
+              </div>
+            </div>
+
+            <div class="form-group row align-items-center">
+               <label for="inputApellido1Atleta" class="col-md-4 col-form-label">Primer Apellido:</label>
+            <div class="col-md-8">
+                  <input type="text" class="form-control" name="primer_apellido" id="Papellido" required>
+              </div>
+            </div>
+            <div class="form-group row align-items-center">
+               <label for="inputApellido1Atleta" class="col-md-4 col-form-label">Segundo Apellido:</label>
+            <div class="col-md-8">
+                  <input type="text" class="form-control" name="segundo_apellido" id="Sapellido" > 
+                  
+              </div>
+            </div>
+            <div class="form-group row align-items-center">
+               <label for="inputCedual" class="col-md-4 col-form-label">Cedula:</label>
+            <div class="col-md-8">  
+                  <input type="number" class="form-control" name="cedula" id="Cedu" required>
+              </div>
+            </div>
+
+            <div class="form-group row align-items-center">
+               <label  class="col-md-4 col-form-label">Fecha de nacimiento:</label>
+            <div class="col-md-8">
+                  <input type="date" class="form-control" name="fecha_nacimiento" id="fecha1" required>
+              </div>
+            </div>
+            
+               <div class="form-group row align-items-center">
+               <label for="inputClub" class="col-md-4 col-form-label">Club:</label>
+              <div class="col-md-8">
+              <select id="inputClub1" name="id_club" class="form-control">
+                <% for(var i=0; i<dataClubs.length; i++) {%>
+                <option value="<%= dataClubs[i]['id'] %>"><%= dataClubs[i]['nombre'] %></option>
+                <% } %>
+              </select>
+             </div>
+             </div>
+
+           <div class="form-group row align-items-center">
+          <label for="inputCategoria" class="col-md-4 col-form-label">Genero:</label>
+           <div class="col-md-8">
+              <select id="inputCategoria1" name="sexo" class="form-control" required>
+                <option value="Femenino">Femenino</option>
+                <option value="Masculino">Masculino</option>
+              </select>
+            </div>
+          </div>
+
+          
+
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-secondary  text-uppercase " data-dismiss="modal" value="Cancelar" id="btn-can1">
+            <input type="submit" class="btn btn-success" value="Modificar" id="btn-mod" > 
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,79 @@
+<% include ../partials/head %>
+
+
+<div class="content-carreras">
+
+	<div class="title text-center">
+		<h1>COMPETENCIA - CREAR</h1>
+	</div>
+
+	<div class="container">
+		<div class="form-wrapper">
+			<div class="form form--step2">
+				<form class="text-center" action="/competencia/crear/finalizar" id="crearCompe">
+
+					<div class="row">
+						<div class="col info-carrera"><%= datosCompetencia['nombre']%>
+						</div>
+						<div class="col info-carrera"><%= datosCompetencia['lugar']%></div>
+						<div class="col info-carrera"><%= datosCompetencia['fecha']%></div>
+						<div class="col info-carrera"><%= datosCompetencia['hora']%></div>
+					</div>
+
+					<input type="hidden" name="nombre" value="<%= datosCompetencia['nombre']%>">
+					<input type="hidden" name="fecha" value="<%= datosCompetencia['fecha']%>">
+					<input type="hidden" name="hora" value="<%= datosCompetencia['hora']%>">
+					<input type="hidden" name="lugar" value="<%= datosCompetencia['lugar']%>">
+
+					<div class="table-responsive">
+
+						<table class="table table-striped table-bordered table-fixed display" style="width:100%" id="myTable" cellspacing="0" width="100%">
+
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Numero</th>
+									<th scope="col">Cedula</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellido</th>
+									<th scope="col">Club</th>
+									<th scope="col">Categoría</th>
+								</tr>
+							</thead>
+							<tbody>
+
+
+
+								<% for(var i=0; i<datosCompetidores.length; i++) {%>
+								<tr>
+									<th scope="row" class="idCompetidor"><%= datosCompetidores[i]['id'] %></th>
+									<td class="numCompetidor"><input type="number" class="numCompetidor" value=""></td>
+									<td><%= datosCompetidores[i]['cedula'] %></td>
+									<td><%= datosCompetidores[i]['primer_nombre'] %></td>
+									<td><%= datosCompetidores[i]['primer_apellido'] %></td>
+									<td><%= datosCompetidores[i]['club_nombre'] %></td>
+									<td><%= datosCompetidores[i]['categoria'] %>-<%= datosCompetidores[i]['sexo'][0] %></td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+
+					<div id="inputs">
+
+					</div>
+
+					<div class="btn-container">
+						<a href="crear" class="btn btn-secondary btn-lg btn-back">Regresar</a>
+						<button type="submit" class="btn btn-success btn-lg btn-save">Guardar</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<% include ../partials/foot %>

@@ -1,0 +1,23 @@
+{
+  "name": "sistema-web-atletismo",
+  "description": "sistema web para carreras de atletismo",
+  "main": "index.js",
+  "authors": [
+    "carlos jaramillo",
+    "leonard mendoza",
+    "david ortega"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/cjalberto/atletismo-ServicioComunitario",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1"
+  }
+}

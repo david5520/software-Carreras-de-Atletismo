@@ -1,0 +1,96 @@
+.content-carreras {
+	.title {
+		@media (min-width: 768px) {
+			padding: 0;
+		}
+	}
+	.container {
+		@media (min-width: 768px) {
+			padding: 10px 0;
+		}
+		.form-wrapper {
+			.form--step2 {
+				.info-carrera {
+					font-weight: bold;
+					padding: 0;
+					@media (min-width: 768px) {
+						padding: 10px 0;
+					}
+				}
+				#myTable_wrapper{
+					.row{
+						padding: 10px 0;
+						@media (min-width: 768px) {
+							padding: 0;
+						}
+					}
+					.row:nth-child(0n+1){
+						display: flex;
+						align-items: center;
+						a{
+							color: white;
+						}
+						#select-all{
+							margin-right: 5px;
+						}
+						label{
+							margin-bottom: 0;
+						}
+						.col-sm-12{
+							padding: 10px 15px;
+							@media (min-width: 768px) {
+								padding: 0;
+							}
+						}
+					}
+
+					.row:nth-child(0n+2){
+						.col-sm-12{
+							//overflow-y: auto;
+							//height: 200px;
+						}	
+					}
+
+					.row:nth-child(0n+3){
+						display: flex;
+						align-items: center;
+						.col-sm-12{
+							padding: 0 15px;
+							.dataTables_info{
+								padding-top: 0;
+							}
+						}
+					}
+				}
+				.btn-container{
+					button{
+						margin: 10px 0;
+					}
+				}
+			}
+		}
+
+		#myTableCompe{
+			tbody{
+				td{
+					a{
+						margin-right: 5px;
+					}
+					form{
+						margin-left: 5px;
+						button{
+							margin: 0;
+						}
+					}
+				}
+			}
+		}
+
+		.btn-container{
+					a{
+						margin: 10px 0;
+					}
+				}
+	}
+}
+

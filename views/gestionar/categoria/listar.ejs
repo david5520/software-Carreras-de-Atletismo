@@ -1,0 +1,61 @@
+<% include ../../partials/head %>
+
+<div class="content-gestionar">
+
+    <div class="title text-center">
+        <h1>CATEGORÍAS</h1>
+    </div>
+
+    <% include crear %>
+    <% include modificar %>
+
+    <div class=container>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-fixed display" style="width:100%" id="myTableGestion" cellspacing="0" width="100%">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Edad Minima</th>
+                        <th scope="col">Edad Maxima</th>
+                        <th scope="col" class="text-center">Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for(var i=0; i<listCategorias.length; i++) {%>
+                    <tr>
+                        <td><%= listCategorias[i]['nombre'] %></td>
+                        <td><%= listCategorias[i]['descripcion'] %></td>
+                        <td><%= listCategorias[i]['edad_min'] %></td>
+                        <td><%= listCategorias[i]['edad_max'] %></td>
+                        <td class="d-flex align-items-center justify-content-center">  
+
+                            <form action="/gestionar/categoria/modificar" class="modiCat" > 
+                                <input type="hidden" class="categoria_nombre" name="categoria_nombre" value="<%= listCategorias[i]['nombre'] %>">
+                                <input type="submit" class="btn btn-primary" href="#editarCatModal" data-toggle="modal" value="Editar" >  
+                            </form> 
+                                   
+                            <form action="/gestionar/categoria/eliminar/<%= listCategorias[i]['nombre'] %>" class="deleteCat">
+                                <button type="submit" class="btn btn-danger" name="delete" onClick="return confirm('¿Quieres eliminar la Categoría?')">Eliminar</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btn-container text-center">
+            <a href="#crearCatModal" data-toggle="modal" class="btn btn-success btn-lg">CREAR</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<% include ../../partials/foot %>

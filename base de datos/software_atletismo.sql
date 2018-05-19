@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-04-2018 a las 18:09:48
+-- Tiempo de generación: 19-05-2018 a las 17:04:28
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `atletismo_IDT`
+-- Base de datos: `software_atletismo`
 --
 
 -- --------------------------------------------------------
@@ -159,6 +159,63 @@ INSERT INTO `competencia_atleta` (`id`, `id_atleta`, `id_competencia`, `tiempo`,
 (33, 3, 17, 9999999, 364),
 (34, 4, 17, 9999999, 494);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisologia`
+--
+
+CREATE TABLE `permisologia` (
+  `id` int(11) NOT NULL,
+  `tipo_usuario` varchar(30) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `permisologia`
+--
+
+INSERT INTO `permisologia` (`id`, `tipo_usuario`, `descripcion`) VALUES
+(1, 'administrador', 'usuario contodos los privilegios'),
+(2, 'normal', 'usuario sin privilegios de administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sexo`
+--
+
+CREATE TABLE `sexo` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sexo`
+--
+
+INSERT INTO `sexo` (`id`, `descripcion`) VALUES
+(2, 'femenino'),
+(1, 'masculino');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `nombre` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `sexo` int(11) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `nombre_usuario` varchar(30) NOT NULL,
+  `clave` varchar(30) NOT NULL,
+  `id` int(11) NOT NULL,
+  `permisologia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Índices para tablas volcadas
 --
@@ -168,8 +225,7 @@ INSERT INTO `competencia_atleta` (`id`, `id_atleta`, `id_competencia`, `tiempo`,
 --
 ALTER TABLE `atleta`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cedula_unique` (`cedula`),
-  ADD KEY `foreing_id_club` (`id_club`);
+  ADD UNIQUE KEY `cedula_unique` (`cedula`);
 
 --
 -- Indices de la tabla `categoria`
@@ -197,6 +253,27 @@ ALTER TABLE `competencia_atleta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `foreing_id_atleta` (`id_atleta`),
   ADD KEY `foreing_id_competencia` (`id_competencia`);
+
+--
+-- Indices de la tabla `permisologia`
+--
+ALTER TABLE `permisologia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `sexo`
+--
+ALTER TABLE `sexo`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_sexo` (`descripcion`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_username` (`nombre_usuario`),
+  ADD KEY `id_permisologia_foreing` (`permisologia`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -233,14 +310,26 @@ ALTER TABLE `competencia_atleta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `permisologia`
 --
+ALTER TABLE `permisologia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Filtros para la tabla `atleta`
+-- AUTO_INCREMENT de la tabla `sexo`
 --
-ALTER TABLE `atleta`
-  ADD CONSTRAINT `foreing_id_club` FOREIGN KEY (`id_club`) REFERENCES `club` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sexo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
 
 --
 -- Filtros para la tabla `competencia_atleta`
@@ -248,6 +337,12 @@ ALTER TABLE `atleta`
 ALTER TABLE `competencia_atleta`
   ADD CONSTRAINT `foreing_id_atleta` FOREIGN KEY (`id_atleta`) REFERENCES `atleta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `foreing_id_competencia` FOREIGN KEY (`id_competencia`) REFERENCES `competencia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `id_permisologia_foreing` FOREIGN KEY (`permisologia`) REFERENCES `permisologia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

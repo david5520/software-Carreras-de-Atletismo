@@ -9,18 +9,18 @@
     "build-css": "node-sass --include-path scss scss/main.scss public/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "build-js": "browserify js/compe.js js/gestion.js js/posts.js -o public/js/bundle.js",
-    "watch-js": "watchify js/compe.js js/gestion.js js/posts.js js/index.js -o public/js/bundle.js -v"
+    "watch-js": "watchify js/compe.js js/gestion.js js/posts.js js/index.js js/usuarios.js -o public/js/bundle.js -v"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cjalberto/atletismo-ServicioComunitario.git"
+    "url": "git+https://github.com/david5520/software-Carreras-de-Atletismo.git"
   },
   "author": "carlos jaramillo , leonard mendoza , david ortega",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cjalberto/atletismo-ServicioComunitario/issues"
+    "url": "https://github.com/david5520/software-Carreras-de-Atletismo/issues"
   },
-  "homepage": "https://github.com/cjalberto/atletismo-ServicioComunitario#readme",
+  "homepage": "https://github.com/david5520/software-Carreras-de-Atletismo#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",

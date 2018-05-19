@@ -645,3 +645,159 @@ $(".eliminarAtle").submit(function (event) {
     });
 
 });
+
+
+
+
+//----------USUARIOS-------------//
+
+//POST ADD USUARIOS//
+
+// Attach a submit handler to the form
+$("#crearUsuario").submit(function (event) {
+
+    // Stop form from submitting normally
+    event.preventDefault();
+    // Get some values from elements on the page:
+    var $form = $(this),
+        datos = {}
+        datos.primer_nombre = $form.find("input[name='primer_nombre']").val(),
+        datos.segundo_nombre = $form.find("input[name='segundo_nombre']").val(),
+        datos.primer_apellido = $form.find("input[name='primer_apellido']").val(),
+        datos.segundo_apellido = $form.find("input[name='segundo_apellido']").val(),
+        datos.cedula = $form.find("input[name='cedula']").val(),
+        datos.usuario = $form.find("input[name='usuario']").val(),
+        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        urlpost = $form.attr("action");
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            if (data.mensaje == 'acept') {
+                swal({ 
+                    title: "Buen trabajo!", 
+                    text: "El Usuario " + datos.primer_nombre + " Creado", 
+                    type: "success" 
+                }).then(function() { window.location = "/Usuarios"; });     
+              
+            } else {
+                alert("Error Conectarse con la Base de Datos");
+            }
+        }
+
+    });
+
+});
+
+//POST MODIFICAR USUSARIO//
+
+$("#modificarUser").submit(function (event) {
+
+    event.preventDefault();
+    console.log('editAtle Click');
+
+    var $form = $(this),
+        datos = {}
+        datos.primer_nombre = $form.find("input[name='primer_nombre']").val(),
+        datos.segundo_nombre = $form.find("input[name='segundo_nombre']").val(),
+        datos.primer_apellido = $form.find("input[name='primer_apellido']").val(),
+        datos.segundo_apellido = $form.find("input[name='segundo_apellido']").val(),
+        datos.cedula = $form.find("input[name='cedula']").val(),
+        datos.usuario = $form.find("input[name='usuario']").val(),
+        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        urlpost = $form.attr("action");
+
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            if (data.mensaje == 'acept') {
+                 swal({ 
+                    title: "Buen trabajo!", 
+                    text: "Usuario " + datos.primer_nombre + " Modificado", 
+                    type: "success" 
+                }).then(function() { window.location = "/Usuarios"; });
+            } else {
+                alert("Error Conectarse con la Base de Datos");
+            }
+        }
+    });
+
+});
+
+// MOSTAR DATOS DE USUARIO A MODIFICAR
+
+$(".modiUser").submit(function (event) {
+
+    event.preventDefault();
+
+    var $form = $(this),
+        datos = {}
+        datos.atleta_id = $form.find("input[name='atleta_id']").val(),
+        urlpost = $form.attr("action");
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+            if (data.code==200) {
+                $('#Pnombre').attr("value", data.data.primer_nombre);
+                $('#Snombre').attr("value", data.data.segundo_nombre);
+                $('#Papellido').attr("value", data.data.primer_apellido);
+                $('#Sapellido').attr("value", data.data.segundo_apellido);
+                $('#Cedu').attr("value", data.data.cedula);
+                $('#User').attr("value", data.data.usuario);
+                $('#Contra').attr("value", data.data.contraseña);
+            }else{
+                 alert("Error Conectarse con la Base de Datos");
+            }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert(xhr.responseJSON.mensaje)
+        }
+    });
+
+});
+
+//eliminar USUARIO
+
+$(".eliminarUser").submit(function (event) {
+
+    event.preventDefault();
+    var $form = $(this),
+        datos = {}
+        datos.atleta_cedula = $form.find("input[name='atleta_cedula']").val(),
+        urlpost = $form.attr("action");
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+            if (data.mensaje == 'acept') {
+
+                 swal({ 
+                    title: "Buen trabajo!", 
+                    text: "Usuario Eliminado", 
+                    type: "success" 
+                }).then(function() { window.location = "/Usuarios"; }); 
+                
+            } else {
+                alert("Error Conectarse con la Base de Datos");
+            }
+        }
+    });
+
+});
+

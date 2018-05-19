@@ -801,3 +801,40 @@ $(".eliminarUser").submit(function (event) {
 
 });
 
+
+//--------LOGIN-------------//
+
+//POST LOGIN//
+
+// Attach a submit handler to the form
+$("#Login").submit(function (event) {
+
+    // Stop form from submitting normally
+    event.preventDefault();
+    // Get some values from elements on the page:
+    var $form = $(this),
+        datos = {}
+        datos.usuario = $form.find("input[name='usuario']").val(),
+        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        urlpost = $form.attr("action");
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            if (data.mensaje == 'acept') {
+                //redireccionar y mostar en el head bienvenido usuario xxxx
+              
+            } else {
+                alert("Error Conectarse con la Base de Datos");
+            }
+        }
+
+    });
+
+});
+
+

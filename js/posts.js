@@ -661,13 +661,13 @@ $("#crearUsuario").submit(function (event) {
     // Get some values from elements on the page:
     var $form = $(this),
         datos = {}
-        datos.primer_nombre = $form.find("input[name='primer_nombre']").val(),
-        datos.segundo_nombre = $form.find("input[name='segundo_nombre']").val(),
-        datos.primer_apellido = $form.find("input[name='primer_apellido']").val(),
-        datos.segundo_apellido = $form.find("input[name='segundo_apellido']").val(),
-        datos.cedula = $form.find("input[name='cedula']").val(),
+        datos.nombre = $form.find("input[name='nombre']").val(),
+        datos.apellido = $form.find("input[name='apellido']").val(),
+        datos.email = $form.find("input[name='email']").val(),
+        datos.sexo = $form.find("input[name='sexo']").val(),
+        datos.fecha_nacimiento = $form.find("input[name='fecha_nacimiento']").val(),
         datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        datos.clave = $form.find("select[name='clave']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -680,7 +680,7 @@ $("#crearUsuario").submit(function (event) {
             if (data.mensaje == 'acept') {
                 swal({ 
                     title: "Buen trabajo!", 
-                    text: "El Usuario " + datos.primer_nombre + " Creado", 
+                    text: "El Usuario " + datos.nombre + " Creado", 
                     type: "success" 
                 }).then(function() { window.location = "/Usuarios"; });     
               
@@ -702,13 +702,13 @@ $("#modificarUser").submit(function (event) {
 
     var $form = $(this),
         datos = {}
-        datos.primer_nombre = $form.find("input[name='primer_nombre']").val(),
-        datos.segundo_nombre = $form.find("input[name='segundo_nombre']").val(),
-        datos.primer_apellido = $form.find("input[name='primer_apellido']").val(),
-        datos.segundo_apellido = $form.find("input[name='segundo_apellido']").val(),
-        datos.cedula = $form.find("input[name='cedula']").val(),
+        datos.nombre = $form.find("input[name='nombre']").val(),
+        datos.apellido = $form.find("input[name='apellido']").val(),
+        datos.email = $form.find("input[name='email']").val(),
+        datos.sexo = $form.find("input[name='sexo']").val(),
+        datos.fecha_nacimiento = $form.find("input[name='fecha_nacimiento']").val(),
         datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        datos.clave = $form.find("select[name='clave']").val(),
         urlpost = $form.attr("action");
 
 
@@ -722,7 +722,7 @@ $("#modificarUser").submit(function (event) {
             if (data.mensaje == 'acept') {
                  swal({ 
                     title: "Buen trabajo!", 
-                    text: "Usuario " + datos.primer_nombre + " Modificado", 
+                    text: "Usuario " + datos.nombre + " Modificado", 
                     type: "success" 
                 }).then(function() { window.location = "/Usuarios"; });
             } else {
@@ -751,13 +751,14 @@ $(".modiUser").submit(function (event) {
         url: urlpost,
         success: function (data) {
             if (data.code==200) {
-                $('#Pnombre').attr("value", data.data.primer_nombre);
-                $('#Snombre').attr("value", data.data.segundo_nombre);
-                $('#Papellido').attr("value", data.data.primer_apellido);
-                $('#Sapellido').attr("value", data.data.segundo_apellido);
-                $('#Cedu').attr("value", data.data.cedula);
+                $('#Nombre').attr("value", data.data.nombre);
+                $('#Apellido').attr("value", data.data.apellido);
+                $('#Email').attr("value", data.data.email);
+                var selectsexo = $("select#inputSexo");
+                selectsexo.val(data.data.sexo).attr('selected', 'selected');
+                $('#Fecha').attr("value", data.data.fecha_nacimiento);
                 $('#User').attr("value", data.data.usuario);
-                $('#Contra').attr("value", data.data.contraseña);
+                $('#Contra').attr("value", data.data.clave);
             }else{
                  alert("Error Conectarse con la Base de Datos");
             }
@@ -776,7 +777,7 @@ $(".eliminarUser").submit(function (event) {
     event.preventDefault();
     var $form = $(this),
         datos = {}
-        datos.atleta_cedula = $form.find("input[name='atleta_cedula']").val(),
+        datos.id = $form.find("input[name='id']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -815,7 +816,7 @@ $("#Login").submit(function (event) {
     var $form = $(this),
         datos = {}
         datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.contraseña = $form.find("select[name='contraseña']").val(),
+        datos.clave = $form.find("select[name='clave']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({

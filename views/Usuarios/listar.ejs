@@ -27,7 +27,7 @@
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Cedula</th>
+					<th scope="col">Usuario</th>
 					<th scope="col">Nombre </th>
 					<th scope="col">Apellido</th>
 					<th>Accion</th>
@@ -40,16 +40,16 @@
 				<tr>
 
 					<td class="idUsuario"><%= dataUsuarios[i]['id'] %></td>
-					<td ><%= dataUsuarios[i]['cedula'] %></td>
-					<td><%= dataUsuarios[i]['primer_nombre'] %></td>
-					<td><%= dataUsuarios[i]['primer_apellido'] %></td>
+					<td ><%= dataUsuarios[i]['nombre_usuario'] %></td>
+					<td><%= dataUsuarios[i]['nombre'] %></td>
+					<td><%= dataUsuarios[i]['apellido'] %></td>
 
 					<td class="d-flex align-items-center justify-content-center">
 						<form action="/Usuarios/modificar" class="modiUser" > 
 							<input type="hidden" id="User_id" name="User_id" value="<%= dataUsuarios[i]['id']%>">
 							<input type="submit" class="btn btn-primary" href="#Usuariomodificar" data-toggle="modal" id="editarU" value="Editar" >  
 						</form>  
-						<form  method="post" action="/Usuarios/eliminar/<%= dataUsuarios[i]['cedula'] %>" class="eliminarUser" > 
+						<form  method="post" action="/Usuarios/eliminar/<%= dataUsuarios[i]['id'] %>" class="eliminarUser" > 
 							<button type="submit" class="btn btn-danger" name="delete"  onClick="return confirm('¿Quieres eliminar el Atleta?')">Eliminar</button>
 						</form>
 					</td>

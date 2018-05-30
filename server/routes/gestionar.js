@@ -10,23 +10,38 @@ router
 	///CRUD CATEGORIAS
 	//list
 	.get('/gestionar/categoria', (req, res , next) => {
-		req.getConnection((err , conexion) => {
-			if (err){
-				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-			}
-			else{
-				conexion.query('SELECT categoria.nombre , categoria.descripcion , categoria.edad_min , categoria.edad_max FROM categoria' , (err , rows) =>{
-					(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('gestionar/categoria/listar', {listCategorias: rows})
-				})
-			}
-		})
+		if (req.session.success = true){
+			req.getConnection((err , conexion) => {
+				if (err){
+					res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+				}
+				else{
+					conexion.query('SELECT categoria.nombre , categoria.descripcion , categoria.edad_min , categoria.edad_max FROM categoria' , (err , rows) =>{
+						(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('gestionar/categoria/listar', {listCategorias: rows})
+					})
+				}
+			})
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.get('/gestionar/categoria/modificar', (req, res , next) => {
-		res.redirect('/gestionar/categoria')
+		if (req.session.success = true){
+			res.redirect('/gestionar/categoria')
+		}
+		else{
+			res.render('index')
+		}
 	})
 	//add
 	.get('/gestionar/categoria/crear', (req, res , next) => {
-		res.render('gestionar/categoria/crear')
+		if (req.session.success = true){
+			res.render('gestionar/categoria/crear')
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.post('/gestionar/categoria/crear' , (req, res , next) => {
 		let categoria = {
@@ -122,27 +137,32 @@ router
 	})
 	//edit
 	.get('/gestionar/categoria/modificar/:categoria_nombre', (req, res , next) => {
-		let categoria_nombre = req.params.categoria_nombre
-		req.getConnection((err , conexion) => {
-			if (err){
-				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-			}
-			else{
-	        	conexion.query('SELECT * FROM categoria WHERE nombre = ?' , categoria_nombre , (err, rows) =>{
-	        		if (err){
-						res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404})
-					}
-	            	res.render('gestionar/categoria/modificar', {
-	                	title: 'Editar Categoría', 
-	                	id: rows[0].id,
-	                	nombre: rows[0].nombre,
-	                	descripcion: rows[0].descripcion,
-	                	edad_min: rows[0].edad_min,
-	                	edad_max: rows[0].edad_max                   
-	            	})
-	        	})
-			}
-	    })
+		if (req.session.success = true){
+			let categoria_nombre = req.params.categoria_nombre
+			req.getConnection((err , conexion) => {
+				if (err){
+					res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+				}
+				else{
+	    	    	conexion.query('SELECT * FROM categoria WHERE nombre = ?' , categoria_nombre , (err, rows) =>{
+	    	    		if (err){
+							res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404})
+						}
+	   	         	res.render('gestionar/categoria/modificar', {
+	    	            	title: 'Editar Categoría', 
+	    	            	id: rows[0].id,
+	    	            	nombre: rows[0].nombre,
+	    	            	descripcion: rows[0].descripcion,
+	    	            	edad_min: rows[0].edad_min,
+	    	            	edad_max: rows[0].edad_max                   
+	    	        	})
+	    	    	})
+				}
+	    	})
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.post('/gestionar/categoria/modificar', (req, res , next) => {
 		let cat_nombre = req.body.cat_nombre
@@ -242,23 +262,38 @@ router
 	///crud de club
 	//list
 	.get('/gestionar/club', (req, res , next) => {
-		req.getConnection((err , conexion) => {
-			if (err){
-				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-			}
-			else{
-				conexion.query('SELECT * FROM  club' , (err , rows) =>{
-					(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('gestionar/club/listar', {listClub: rows})
-				})
-			}
-		})
+		if (req.session.success = true){
+			req.getConnection((err , conexion) => {
+				if (err){
+					res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+				}
+				else{
+					conexion.query('SELECT * FROM  club' , (err , rows) =>{
+						(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('gestionar/club/listar', {listClub: rows})
+					})
+				}
+			})
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.get('/gestionar/club/modificar', (req, res , next) => {
-		res.redirect('/gestionar/club')
+		if (req.session.success = true){
+			res.redirect('/gestionar/club')
+		}
+		else{
+			res.render('index')
+		}
 	})
 	//add
 	.get('/gestionar/club/crear', (req, res , next) => {
-		res.render('gestionar/club/crear')
+		if (req.session.success = true){
+			res.render('gestionar/club/crear')
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.post('/gestionar/club/crear' , (req, res , next) => {
 		let club = {
@@ -404,36 +439,41 @@ router
 
 	//CRUD ATLETAS
 	.get('/gestionar/atleta', (req, res , next) => {
-   		req.getConnection((err , conexion) => {
-			if (err){
-				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-			}
-			else{
-				let promesa = new Promise((resolve , reject) => {
-					conexion.query('SELECT * FROM club', (err , rows) =>{
-						(err) ? reject(new Error('Error al consultar la base de datos')) : resolve({dataClubs : rows})
-					})
-				})
-				promesa
-					.then((data) => {
-						return new Promise((resolve , reject) => {
-							conexion.query('SELECT atleta.* , club.nombre nombre_club FROM atleta LEFT JOIN club ON atleta.id_club=club.id', (err, rows) =>{ 
-								(err) ? reject(new Error('Error al consultar la base de datos')) : resolve({dataClubs : data.dataClubs , dataAtletas : rows})           
-							})
+		if (req.session.success = true){
+   			req.getConnection((err , conexion) => {
+				if (err){
+					res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+				}
+				else{
+					let promesa = new Promise((resolve , reject) => {
+						conexion.query('SELECT * FROM club', (err , rows) =>{
+							(err) ? reject(new Error('Error al consultar la base de datos')) : resolve({dataClubs : rows})
 						})
 					})
-					.then((data) => {
-						res.render('gestionar/atleta/listar' , data)
-					})
-					.catch((err) =>{
-						res.render('error', {mensaje : err.message , code : 404})
-					})
-			}
-		})
+					promesa
+						.then((data) => {
+							return new Promise((resolve , reject) => {
+								conexion.query('SELECT atleta.* , club.nombre nombre_club FROM atleta LEFT JOIN club ON atleta.id_club=club.id', (err, rows) =>{ 
+									(err) ? reject(new Error('Error al consultar la base de datos')) : resolve({dataClubs : data.dataClubs , dataAtletas : rows})           
+								})
+							})
+						})
+						.then((data) => {
+							res.render('gestionar/atleta/listar' , data)
+						})
+						.catch((err) =>{
+							res.render('error', {mensaje : err.message , code : 404})
+						})
+				}
+			})
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.post('/gestionar/atleta/modificar', (req, res , next) => {
+		if (req.session.success = true){
 		let atleta_id = req.body.atleta_id
-		console.log(req.body)
 		req.getConnection((err , conexion) => {
 			if (err){
 				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
@@ -451,6 +491,10 @@ router
 			}
 	        
 	    })
+		}
+		else{
+			res.render('index')
+		}
 	})
 	.post('/gestionar/atleta/modificar/:atleta_id', (req, res , next) => {
 		let atleta_id = req.params.atleta_id

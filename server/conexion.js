@@ -7,7 +7,7 @@ var mysql = require('mysql'),
       port: 3306,
       user: 'root',
       password: '',
-      database: 'atletismo_IDT'
+      database: 'software_atletismo'
     },
     db = expressMyconnection(mysql , dbOptions , 'request')
 

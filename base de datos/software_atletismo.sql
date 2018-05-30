@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-05-2018 a las 05:47:24
+-- Tiempo de generación: 19-05-2018 a las 17:04:28
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -182,6 +182,25 @@ INSERT INTO `permisologia` (`id`, `tipo_usuario`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sexo`
+--
+
+CREATE TABLE `sexo` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sexo`
+--
+
+INSERT INTO `sexo` (`id`, `descripcion`) VALUES
+(2, 'femenino'),
+(1, 'masculino');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -189,22 +208,13 @@ CREATE TABLE `usuario` (
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `sexo` varchar(30) NOT NULL,
+  `sexo` int(11) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `nombre_usuario` varchar(30) NOT NULL,
   `clave` varchar(30) NOT NULL,
   `id` int(11) NOT NULL,
   `permisologia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`nombre`, `apellido`, `email`, `sexo`, `fecha_nacimiento`, `nombre_usuario`, `clave`, `id`, `permisologia`) VALUES
-('carlosq', 'jaramillo', 'cjalberto1503@gmail.com', 'Masculino', '2018-05-01', 'cjalberto', '1234', 1, 2),
-('david', 'ortega', 'david.ortega@unet.edu.ve', 'Masculino', '2018-05-07', 'david', '12', 3, 2),
-('asf', 'asf', 'sdf@fahoi.com', 'Masculino', '2018-05-04', 'asd', 'fdsa', 5, 2);
 
 --
 -- Índices para tablas volcadas
@@ -251,6 +261,13 @@ ALTER TABLE `permisologia`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `sexo`
+--
+ALTER TABLE `sexo`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_sexo` (`descripcion`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -278,7 +295,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `club`
 --
 ALTER TABLE `club`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `competencia`
@@ -299,10 +316,16 @@ ALTER TABLE `permisologia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `sexo`
+--
+ALTER TABLE `sexo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

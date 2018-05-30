@@ -4,6 +4,9 @@ var express = require('express'),
 	app = express(),
 	path = require('path'),
 	bodyParser = require('body-parser'),
+	expressValidator = require('express-validator'),
+	expressSession = require('express-session'),
+	cookieParser = require('cookie-parser'),
 	routes = require('./routes/index'),
 	routes_competencia = require('./routes/competencia'),
 	routes_gestionar = require('./routes/gestionar'),
@@ -18,6 +21,9 @@ app
 
 	.use(bodyParser.json())
 	.use(bodyParser.urlencoded({extended : false}))
+	.use(cookieParser())
+	.use(expressValidator())
+	.use(expressSession({secret : 'atletismo' , saveUninitialized : true , resave : true}))
 	.use(express.static(path.join(__dirname , '../public')))
 	.use('/competencia',express.static('public'))
 	.use('/competencia/modificar',express.static('public'))

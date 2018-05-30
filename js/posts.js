@@ -663,11 +663,12 @@ $("#crearUsuario").submit(function (event) {
         datos = {}
         datos.nombre = $form.find("input[name='nombre']").val(),
         datos.apellido = $form.find("input[name='apellido']").val(),
-        datos.email = $form.find("input[name='email']").val(),
-        datos.sexo = $form.find("input[name='sexo']").val(),
+        datos.email = $form.find("input[name='Email']").val(),
+        datos.sexo = $form.find("select[name='sexo']").val(),
         datos.fecha_nacimiento = $form.find("input[name='fecha_nacimiento']").val(),
-        datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.clave = $form.find("select[name='clave']").val(),
+        datos.usuario = $form.find("input[name='Usuario']").val(),
+        datos.clave= $form.find("input[name='password']").val(),
+        datos.confirmPassword= $form.find("input[name='confirmPassword']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -704,11 +705,11 @@ $("#modificarUser").submit(function (event) {
         datos = {}
         datos.nombre = $form.find("input[name='nombre']").val(),
         datos.apellido = $form.find("input[name='apellido']").val(),
-        datos.email = $form.find("input[name='email']").val(),
-        datos.sexo = $form.find("input[name='sexo']").val(),
+        datos.email = $form.find("input[name='Email']").val(),
+        datos.sexo = $form.find("select[name='sexo']").val(),
         datos.fecha_nacimiento = $form.find("input[name='fecha_nacimiento']").val(),
-        datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.clave = $form.find("select[name='clave']").val(),
+        datos.usuario = $form.find("input[name='Usuario']").val(),
+        datos.clave= $form.find("input[name='password']").val(),
         urlpost = $form.attr("action");
 
 
@@ -741,7 +742,7 @@ $(".modiUser").submit(function (event) {
 
     var $form = $(this),
         datos = {}
-        datos.atleta_id = $form.find("input[name='atleta_id']").val(),
+        datos.usuario_id = $form.find("input[name='usuario_id']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -757,7 +758,7 @@ $(".modiUser").submit(function (event) {
                 var selectsexo = $("select#inputSexo");
                 selectsexo.val(data.data.sexo).attr('selected', 'selected');
                 $('#Fecha').attr("value", data.data.fecha_nacimiento);
-                $('#User').attr("value", data.data.usuario);
+                $('#User').attr("value", data.data.nombre_usuario);
                 $('#Contra').attr("value", data.data.clave);
             }else{
                  alert("Error Conectarse con la Base de Datos");
@@ -777,7 +778,7 @@ $(".eliminarUser").submit(function (event) {
     event.preventDefault();
     var $form = $(this),
         datos = {}
-        datos.id = $form.find("input[name='id']").val(),
+        datos.usuario_id = $form.find("input[name='usuario_id']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -803,6 +804,7 @@ $(".eliminarUser").submit(function (event) {
 });
 
 
+
 //--------LOGIN-------------//
 
 //POST LOGIN//
@@ -815,8 +817,8 @@ $("#Login").submit(function (event) {
     // Get some values from elements on the page:
     var $form = $(this),
         datos = {}
-        datos.usuario = $form.find("input[name='usuario']").val(),
-        datos.clave = $form.find("select[name='clave']").val(),
+        datos.nombre_usuario = $form.find("input[name='nombre_usuario']").val(),
+        datos.clave = $form.find("input[name='clave']").val(),
         urlpost = $form.attr("action");
 
     $.ajax({
@@ -828,6 +830,7 @@ $("#Login").submit(function (event) {
             console.log(JSON.stringify(data));
             if (data.mensaje == 'acept') {
                 //redireccionar y mostar en el head bienvenido usuario xxxx
+                console.log('entreeee')
               
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -837,5 +840,4 @@ $("#Login").submit(function (event) {
     });
 
 });
-
 

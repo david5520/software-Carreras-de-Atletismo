@@ -828,7 +828,6 @@ $("#Login").submit(function (event) {
         url: urlpost,
         success: function (data) {
         console.log(JSON.stringify(data));
-            if (data.code == 400) { console.log('no existe')}
             if (data.mensaje == 'acept') {
 
                 if (data.dataUser.permisologia == 1) {
@@ -849,7 +848,14 @@ $("#Login").submit(function (event) {
                 }
 
               
-            } else {
+            } else if (data.code == 404) { 
+                 swal({ 
+                    title: "", 
+                    text: "Usuario o Contraseña invalida", 
+                    type: "error" 
+                }) }
+
+             else {
                 alert("Error Conectarse con la Base de Datos");
             }
         }

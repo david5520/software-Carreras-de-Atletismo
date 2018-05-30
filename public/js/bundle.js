@@ -1046,7 +1046,8 @@ $("#Login").submit(function (event) {
         contentType: 'application/json',
         url: urlpost,
         success: function (data) {
-            console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data));
+            if (data.code == 400) { console.log('no existe')}
             if (data.mensaje == 'acept') {
 
                 if (data.dataUser.permisologia == 1) {
@@ -1056,7 +1057,8 @@ $("#Login").submit(function (event) {
                     });
 
                 
-                }else {
+                }
+                else {
                      $(document).ready(function() {
                      $("#loginModal").modal('toggle');
                      $("#User1").hide();

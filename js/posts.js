@@ -829,6 +829,11 @@ $("#Login").submit(function (event) {
         success: function (data) {
             console.log(JSON.stringify(data));
             if (data.mensaje == 'acept') {
+
+                $(document).ready(function() {
+                     $("#loginModal").hide();
+   
+                });
                 //redireccionar y mostar en el head bienvenido usuario xxxx
                 console.log('entreeee')
               

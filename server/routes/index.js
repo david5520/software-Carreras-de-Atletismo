@@ -215,7 +215,7 @@ router
 					req.session.success = true
 					req.session.userData = JSON.parse(JSON.stringify(rows[0]))
 					res.status(200)
-					res.send({mensaje : 'acept' , code : 200})
+					res.send({mensaje : 'acept', code : 200})
 				}
 			})	
 		})			

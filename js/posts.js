@@ -830,12 +830,22 @@ $("#Login").submit(function (event) {
             console.log(JSON.stringify(data));
             if (data.mensaje == 'acept') {
 
-                $(document).ready(function() {
-                     $("#loginModal").hide();
+                if (data.dataUser.permisologia == 1) {
+                    
+                    $(document).ready(function() {
+                     $("#loginModal").modal('toggle');
+                    });
+
+                
+                }else {
+                     $(document).ready(function() {
+                     $("#loginModal").modal('toggle');
+                     $("#User1").hide();
    
-                });
-                //redireccionar y mostar en el head bienvenido usuario xxxx
-                console.log('entreeee')
+                    });
+                    
+                }
+
               
             } else {
                 alert("Error Conectarse con la Base de Datos");

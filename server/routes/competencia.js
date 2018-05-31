@@ -9,11 +9,13 @@ router
 
 	//CREAR//
 	.get('/competencia/crear', (req, res , next) => {
-		if (req.session.success = true){
-			res.render('competencia/crear-1')
+		if(req.session.success){
+			if (req.session.success = true){
+				res.render('competencia/crear-1')
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
 	})
 	.post('/competencia/crear' , (req, res , next) => {
@@ -68,27 +70,31 @@ router
 
     //LISTAR//
     .get('/competencia/listar', (req, res, next) => {
-		if (req.session.success = true){
-        	req.getConnection((err, conexion) => {
-        	    if (err != null) {
-        	    	res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-        	    }else{
-	    	        conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%Y-%m-%d') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com WHERE finalizado=0`, (err, rows) => {
-	    	            (err) ? res.render('error', {error: err, mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('competencia/listar', { datosCompetencia: rows })
-	    	        })          	
-        	    }
-        	})
+		if(req.session.success){
+			if (req.session.success = true){
+        		req.getConnection((err, conexion) => {
+        		    if (err != null) {
+        		    	res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+        		    }else{
+	    		        conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%Y-%m-%d') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com WHERE finalizado=0`, (err, rows) => {
+	    		            (err) ? res.render('error', {error: err, mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('competencia/listar', { datosCompetencia: rows })
+	    		        })          	
+        		    }
+        		})
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
     })
 	.get('/competencia/modificar', (req, res , next) => {
-		if (req.session.success = true){
-			res.redirect('/competencia/listar')
+		if(req.session.success){
+			if (req.session.success = true){
+				res.redirect('/competencia/listar')
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
 	})
 
@@ -110,56 +116,57 @@ router
     })
     //EDIT//
     .get('/competencia/modificar/:competencia_id', (req, res, next) => {
-		if (req.session.success = true){
-        	let competencia_id = req.params.competencia_id
-			
-        	req.getConnection((err, conexion) => {
-        		if (err){
-					res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-				}
-				else{
-					let promesa = new Promise((resolve , reject) => {
-						conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%Y-%m-%d') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com  WHERE com.id = ?`, competencia_id , (err , rows) =>{
-							if (err){
-								reject({err : new Error('Error al consultar la base de datos') , flag : false})
-							}
-							else{
-								resolve(rows)
-							}
-						})
-					})
-					promesa
-						.then((competencia) => {
-							return new Promise((resolve , reject) => {
-								conexion.query(`SELECT at.*, cl.nombre club_nombre , TIMESTAMPDIFF(YEAR,at.fecha_nacimiento,CURDATE()) edad , Year(CURDATE()) - YEAR(at.fecha_nacimiento) edad_categoria , IFNULL((SELECT categoria.nombre FROM categoria WHERE (edad_categoria BETWEEN categoria.edad_min AND categoria.edad_max)) , 'libre') categoria FROM atleta at LEFT JOIN club cl ON at.id_club=cl.id` , (err , atletas) =>{
-									(err) ? reject({err : new Error('Error al consultar la base de datos') , flag : false}) : resolve({dataCompetencia : competencia , dataAtletas : atletas})
-								})
+		if(req.session.success){
+			if (req.session.success = true){
+				let competencia_id = req.params.competencia_id
+        		req.getConnection((err, conexion) => {
+        			if (err){
+						res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+					}
+					else{
+						let promesa = new Promise((resolve , reject) => {
+							conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%Y-%m-%d') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com  WHERE com.id = ?`, competencia_id , (err , rows) =>{
+								if (err){
+									reject({err : new Error('Error al consultar la base de datos') , flag : false})
+								}
+								else{
+									resolve(rows)
+								}
 							})
 						})
-						.then((data) => {
-							return new Promise((resolve , reject) => {
-								conexion.query(`SELECT * FROM competencia_atleta WHERE id_competencia = ?`, competencia_id, (err, compe_atleta) =>{
-									(err) ? reject({err : new Error('Error al consultar la base de datos') , flag : false}) : resolve({datosCompe : data.dataCompetencia , datosAtletas : data.dataAtletas , datosCompeAtleta : compe_atleta})
+						promesa
+							.then((competencia) => {
+								return new Promise((resolve , reject) => {
+									conexion.query(`SELECT at.*, cl.nombre club_nombre , TIMESTAMPDIFF(YEAR,at.fecha_nacimiento,CURDATE()) edad , Year(CURDATE()) - YEAR(at.fecha_nacimiento) edad_categoria , IFNULL((SELECT categoria.nombre FROM categoria WHERE (edad_categoria BETWEEN categoria.edad_min AND categoria.edad_max)) , 'libre') categoria FROM atleta at LEFT JOIN club cl ON at.id_club=cl.id` , (err , atletas) =>{
+										(err) ? reject({err : new Error('Error al consultar la base de datos') , flag : false}) : resolve({dataCompetencia : competencia , dataAtletas : atletas})
+									})
 								})
 							})
-						})
-						.then((data) => {
-							res.render('competencia/modificar', data)
-						})
-						.catch((err) =>{
-							if (err.flag){
-								res.status(404)
-								res.send({mensaje : err.err.message , code : 404})
-							}
-							else{
-								res.render('error', {mensaje : err.err.message , code : 404})
-							}
-						})
-				}
-        	})
+							.then((data) => {
+								return new Promise((resolve , reject) => {
+									conexion.query(`SELECT * FROM competencia_atleta WHERE id_competencia = ?`, competencia_id, (err, compe_atleta) =>{
+										(err) ? reject({err : new Error('Error al consultar la base de datos') , flag : false}) : resolve({datosCompe : data.dataCompetencia , datosAtletas : data.dataAtletas , datosCompeAtleta : compe_atleta})
+									})
+								})
+							})
+							.then((data) => {
+								res.render('competencia/modificar', data)
+							})
+							.catch((err) =>{
+								if (err.flag){
+									res.status(404)
+									res.send({mensaje : err.err.message , code : 404})
+								}
+								else{
+									res.render('error', {mensaje : err.err.message , code : 404})
+								}
+							})
+					}
+        		})
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
     })
     .post('/competencia/modificar', (req, res, next) => {
@@ -284,20 +291,22 @@ router
 
     //INICIAR//
     .get('/competencia/iniciar', (req, res, next) => {
-		if (req.session.success = true){
-        	req.getConnection((err, conexion) => {
-        		if (err){
-	    	        res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404})
-	    	    }
-	    	    else{
-        	    	conexion.query(`SELECT competencia.nombre , DATE_FORMAT(competencia.fecha,'%Y-%m-%d') fecha , TIME(competencia.hora) hora , competencia.lugar , competencia.id FROM competencia WHERE finalizado = 0`, (err, rows) => {
-        	        	(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('competencia/iniciar', { datosCompetencia: rows })
-        	    	})
-	    	    }
-        	})
+		if(req.session.success){
+			if (req.session.success = true){
+        		req.getConnection((err, conexion) => {
+        			if (err){
+	    		        res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404})
+	    		    }
+	    		    else{
+        		    	conexion.query(`SELECT competencia.nombre , DATE_FORMAT(competencia.fecha,'%Y-%m-%d') fecha , TIME(competencia.hora) hora , competencia.lugar , competencia.id FROM competencia WHERE finalizado = 0`, (err, rows) => {
+        		        	(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('competencia/iniciar', { datosCompetencia: rows })
+        		    	})
+	    		    }
+        		})
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
     })
 

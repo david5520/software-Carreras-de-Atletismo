@@ -10,41 +10,45 @@ router
 	.use(breadcrumb())
 	//INDEX
 	.get('/', (req, res , next) => {
-		res.render('index',{dataUser : (req.session.success) == true ? req.session.userData : null})
+		res.render('index',{dataUser : (req.session.success) ? ((req.session.success) == true ? req.session.userData : null) : null})
 	})
 	//COMPETENCIA
 	.get('/competencia', (req, res , next) => {
-		if (req.session.success = true){
-			res.render('competencia')
+		if(req.session.success){
+			if (req.session.success = true){
+				res.render('competencia')
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
 	})
 	//GESTIONAR
 	.get('/gestionar', (req, res , next) => {
-		if (req.session.success = true){
-			res.render('gestionar')
+		if(req.session.success){
+			if (req.session.success = true){
+				res.render('gestionar')
+			}
 		}
-		else{
-			res.render('index')
-		}
+		res.redirect('/')
 	})
 	//HISTORIAL
 	.get('/historial', (req, res , next) => {
-		if (req.session.success = true){
-        	req.getConnection((err, conexion) => {
-        	    if (err != null) {
-        	    	res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-        	    }else{
-	    	        conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%d/%m/%Y') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com WHERE finalizado=1`, (err, rows) => {
-	    	            (err) ? res.render('error', {error: err, mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('historial', { datosCompetencia: rows })
-	    	        })          	
-        	    }
-        	})
+		if(req.session.success){
+			if (req.session.success = true){
+        		req.getConnection((err, conexion) => {
+        		    if (err != null) {
+        		    	res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+        		    }else{
+	    		        conexion.query(`SELECT com.nombre as 'nombre' , com.id as 'id' , DATE_FORMAT(com.fecha,'%d/%m/%Y') as 'fecha' , TIME(com.hora) as 'hora' , com.lugar as 'lugar' FROM competencia com WHERE finalizado=1`, (err, rows) => {
+	    		            (err) ? res.render('error', {error: err, mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('historial', { datosCompetencia: rows })
+	    		        })          	
+        		    }
+        		})
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
 	})
 
@@ -52,18 +56,20 @@ router
 //registro y login
 
 	.get('/Usuarios', (req, res , next) => {
-		if (req.session.success = true){
-			req.getConnection((err , conexion) => {
-				if (err != null) {
-            		res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-            	}
-				conexion.query(`SELECT usu.nombre AS nombre, usu.apellido AS apellido, usu.email AS email, usu.sexo AS sexo, DATE_FORMAT(usu.fecha_nacimiento,'%Y-%m-%d') as fecha_nacimiento, usu.nombre_usuario AS nombre_usuario, usu.clave AS clave, usu.id AS id, usu.permisologia AS permisologia FROM usuario usu LEFT JOIN permisologia per ON per.id=usu.permisologia` , (err , usuarios) =>{
-					(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('Usuarios/listar',{dataUsuarios: usuarios})
+		if(req.session.success){
+			if (req.session.success = true){
+				req.getConnection((err , conexion) => {
+					if (err != null) {
+            			res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+            		}
+					conexion.query(`SELECT usu.nombre AS nombre, usu.apellido AS apellido, usu.email AS email, usu.sexo AS sexo, DATE_FORMAT(usu.fecha_nacimiento,'%Y-%m-%d') as fecha_nacimiento, usu.nombre_usuario AS nombre_usuario, usu.clave AS clave, usu.id AS id, usu.permisologia AS permisologia FROM usuario usu LEFT JOIN permisologia per ON per.id=usu.permisologia` , (err , usuarios) =>{
+						(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('Usuarios/listar',{dataUsuarios: usuarios})
+					})
 				})
-			})
+			}
 		}
 		else{
-			res.render('index')
+			res.redirect('..')
 		}
 	})
 	.post('/Usuarios/modificar', (req, res , next) => {

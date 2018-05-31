@@ -834,7 +834,14 @@ $("#Login").submit(function (event) {
                     
                     $(document).ready(function() {
                      $("#loginModal").modal('toggle');
+                    
                     });
+                    swal({ 
+                    title: "", 
+                    text: "Bienvenido "+ data.dataUser.nombre +" "+ data.dataUser.apellido , 
+                    type: "success" 
+                    }) 
+                    inicio=1;
 
                 
                 }
@@ -850,7 +857,7 @@ $("#Login").submit(function (event) {
               
             } else if (data.code == 404) { 
                  swal({ 
-                    title: "", 
+                    title: "Error", 
                     text: "Usuario o Contraseña invalida", 
                     type: "error" 
                 }) }

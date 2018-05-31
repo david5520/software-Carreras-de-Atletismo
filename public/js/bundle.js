@@ -1044,6 +1044,7 @@ $("#Login").submit(function (event) {
         type: 'POST',
         data: JSON.stringify(datos),
         contentType: 'application/json',
+        cache: true,
         url: urlpost,
         success: function (data) {
         console.log(JSON.stringify(data));
@@ -1052,7 +1053,9 @@ $("#Login").submit(function (event) {
                 if (data.dataUser.permisologia == 1) {
                     
                     $(document).ready(function() {
-                     $("#loginModal").modal('toggle');
+                        $("#loginModal").modal('toggle');
+                     
+                     //$("#Cerrar1").show();
                     
                     });
                     swal({ 
@@ -1060,7 +1063,17 @@ $("#Login").submit(function (event) {
                     text: "Bienvenido "+ data.dataUser.nombre +" "+ data.dataUser.apellido , 
                     type: "success" 
                     }) 
-                    inicio=1;
+                   
+
+                    // Check browser support
+                        if (typeof(Storage) !== "undefined") {
+                     // Store
+                        sessionStorage.setItem("lastname", data.dataUser.nombre );
+                    // Retrieve
+                        document.getElementById("result").innerHTML = sessionStorage.getItem("lastname");
+                        } else {
+                        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                        }
 
                 
                 }
@@ -1068,6 +1081,7 @@ $("#Login").submit(function (event) {
                      $(document).ready(function() {
                      $("#loginModal").modal('toggle');
                      $("#User1").hide();
+                     //$("#Cerrar1").show();
    
                     });
                     
@@ -1090,7 +1104,38 @@ $("#Login").submit(function (event) {
 
 });
 
+/// CERRAR SESION
 
+
+$("#Cerrar").submit(function (event) {
+
+    // Stop form from submitting normally
+    event.preventDefault();
+    // Get some values from elements on the page:
+    var $form = $(this),
+        datos = {}
+        urlpost = $form.attr("action");
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        contentType: 'application/json',
+        url: urlpost,
+        success: function (data) {
+        console.log(JSON.stringify(data));
+            if (data.mensaje == 'acept') {
+                console.log('ceeeee')
+
+                 window.location = "....";
+              
+            } else {
+                alert("Error Conectarse con la Base de Datos");
+            }
+        }
+
+    });
+
+});
 },{}],5:[function(require,module,exports){
 
 var table = $('#myTableUser').DataTable({
@@ -1148,4 +1193,4 @@ $('#btn-canU1').click(function(){
 });
 
 
-},{}]},{},[1,2,4,3,5]);
+},{}]},{},[1,2,4,5,3]);

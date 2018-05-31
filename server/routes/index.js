@@ -10,6 +10,7 @@ router
 	.use(breadcrumb())
 	//INDEX
 	.get('/', (req, res , next) => {
+		console.log(req.session.success)
 		res.render('index',{dataUser : (req.session.success) ? ((req.session.success) == true ? req.session.userData : null) : null})
 	})
 	//COMPETENCIA
@@ -210,11 +211,11 @@ router
 		req.getConnection((err , conexion) => {
 			conexion.query(`SELECT usu.nombre AS nombre, usu.apellido AS apellido, usu.email AS email, usu.sexo AS sexo, DATE_FORMAT(usu.fecha_nacimiento,'%Y-%m-%d') as fecha_nacimiento, usu.nombre_usuario AS nombre_usuario, usu.clave AS clave, usu.id AS id, usu.permisologia AS permisologia FROM usuario usu LEFT JOIN permisologia per ON per.id=usu.permisologia WHERE usu.nombre_usuario = '${req.body.nombre_usuario}' AND usu.clave = '${req.body.clave}'`, (err , rows) =>{
 				if (err){
-					res.status(404)
+					res.status(200)
 					res.send({mensaje : err.message , code : 404})
 				}
 				else if (rows.length == 0){
-					res.status(404)
+					res.status(200)
 					res.send({mensaje : 'usuario no existe' , code : 404})
 				}
 				else{
@@ -227,9 +228,8 @@ router
 		})			
 	})
 	.post('/Usuarios/logout', (req, res , next) => {
-		res.status(200)
-		res.send({mensaje : 'acept' , code : 200})
 		req.session.success = false
-		req.session.userData = null		
+		req.session.userData = null	
+		res.redirect('..')
 	})
 module.exports = router

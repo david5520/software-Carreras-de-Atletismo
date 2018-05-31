@@ -1046,7 +1046,7 @@ $("#Login").submit(function (event) {
         contentType: 'application/json',
         url: urlpost,
         success: function (data) {
-            console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data));
             if (data.mensaje == 'acept') {
 
                 if (data.dataUser.permisologia == 1) {
@@ -1056,7 +1056,8 @@ $("#Login").submit(function (event) {
                     });
 
                 
-                }else {
+                }
+                else {
                      $(document).ready(function() {
                      $("#loginModal").modal('toggle');
                      $("#User1").hide();
@@ -1066,7 +1067,14 @@ $("#Login").submit(function (event) {
                 }
 
               
-            } else {
+            } else if (data.code == 404) { 
+                 swal({ 
+                    title: "", 
+                    text: "Usuario o Contraseña invalida", 
+                    type: "error" 
+                }) }
+
+             else {
                 alert("Error Conectarse con la Base de Datos");
             }
         }

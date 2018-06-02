@@ -8,13 +8,31 @@ var conexion = require('../conexion'),
 router
 	.use(conexion)
 	.use(breadcrumb())
-	//INDEX
+	//INICIAR SESION
 	.get('/', (req, res , next) => {
 		console.log(req.session.success)
-		res.render('index',{dataUser : (req.session.success) ? ((req.session.success) == true ? req.session.userData : null) : null})
+		res.render('iniciar_sesion',{dataUser : (req.session.success) ? ((req.session.success) == true ? req.session.userData : null) : null})
+	})
+	//INDEX
+	.get('/index', (req, res , next) => {
+		if(req.session.success){
+			if (req.session.success = true){
+				req.getConnection((err , conexion) => {
+					if (err != null) {
+            			res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
+            		}
+					conexion.query(`SELECT usu.nombre AS nombre, usu.apellido AS apellido, usu.email AS email, usu.sexo AS sexo, DATE_FORMAT(usu.fecha_nacimiento,'%Y-%m-%d') as fecha_nacimiento, usu.nombre_usuario AS nombre_usuario, usu.clave AS clave, usu.id AS id, usu.permisologia AS permisologia FROM usuario usu LEFT JOIN permisologia per ON per.id=usu.permisologia` , (err , usuarios) =>{
+						(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('index',{dataUsuarios: usuarios})
+					})
+				})
+			}
+		}
+		else{
+			res.redirect('..')
+		}
 	})
 	//COMPETENCIA
-	.get('/competencia', (req, res , next) => {
+	.get('/index/competencia', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.render('competencia')
@@ -25,7 +43,7 @@ router
 		}
 	})
 	//GESTIONAR
-	.get('/gestionar', (req, res , next) => {
+	.get('/index/gestionar', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.render('gestionar')
@@ -34,7 +52,7 @@ router
 		res.redirect('/')
 	})
 	//HISTORIAL
-	.get('/historial', (req, res , next) => {
+	.get('/index/historial', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
         		req.getConnection((err, conexion) => {
@@ -56,7 +74,7 @@ router
 
 //registro y login
 
-	.get('/Usuarios', (req, res , next) => {
+	.get('/index/Usuarios', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				req.getConnection((err , conexion) => {
@@ -73,7 +91,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/Usuarios/modificar', (req, res , next) => {
+	.post('/index/Usuarios/modificar', (req, res , next) => {
 		let usuario_id = req.body.usuario_id
 		req.getConnection((err , conexion) => {
 			if (err != null) {
@@ -95,7 +113,7 @@ router
 			})
 		})
 	})
-	.post('/Usuarios/crear', (req, res , next) => {
+	.post('/index/Usuarios/crear', (req, res , next) => {
 		req.check('clave' , 'contraseña invalida').isLength({min : 4}).equals(req.body.confirmPassword)
 		var errors = req.validationErrors()
 		if (errors) {
@@ -144,7 +162,7 @@ router
 			})
 		}						
 	})
-	.post('/Usuarios/modificar/:usuario_id', (req, res , next) => {
+	.post('/index/Usuarios/modificar/:usuario_id', (req, res , next) => {
 		req.check('clave' , 'contraseña invalida').isLength({min : 4})
 		var errors = req.validationErrors()
 		if (errors) {
@@ -193,7 +211,7 @@ router
 			})
 		}						
 	})
-	.post('/Usuarios/eliminar/:usuario_id', (req, res , next) => {
+	.post('/index/Usuarios/eliminar/:usuario_id', (req, res , next) => {
 		req.getConnection((err , conexion) => {
 			conexion.query(`DELETE FROM usuario where id = '${req.params.usuario_id}'`, (err , rows) =>{
 				if (err){

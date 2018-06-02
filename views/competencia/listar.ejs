@@ -32,8 +32,8 @@
 					<td><%= datosCompetencia[i]['fecha'] %></td>
 					<td><%= datosCompetencia[i]['hora'] %></td>
 					<td class="d-flex align-items-center justify-content-center">
-	                    <a class="btn btn-primary" href="/competencia/modificar/<%= datosCompetencia[i]['id'] %>">Editar</a>           
-	                    <form method="post" action="/competencia/eliminar/<%= datosCompetencia[i]['id'] %>">
+	                    <a class="btn btn-primary" href="/index/competencia/modificar/<%= datosCompetencia[i]['id'] %>">Editar</a>           
+	                    <form method="post" action="/index/competencia/eliminar/<%= datosCompetencia[i]['id'] %>">
 	                    	<button type="submit" class="btn btn-danger" name="delete" onClick="return confirm('¿Quieres eliminar la competencia?')">Eliminar</button>
 	                    </form>
 

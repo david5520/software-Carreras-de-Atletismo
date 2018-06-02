@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-12 col-md-7" id="Bienvenido">
 						<h1>Sistema de Atletismo</h1>
-						<h4>Bienvienido:  <div id="result" style="margin-top: -4.5%; margin-left: 31%;"></div> </h4>
+						
 						<form  method="post" action="/Usuarios/logout" id="Cerrar" > 
 							<button type="submit" class="btn btn-danger" name="Cerrar_Sesion" id="Cerrar1"  onClick="return confirm('Seguro que quieres salir')" style="margin-top: -8%; margin-left: 100%;" >Cerrar Sesion  </button>
 						</form>
@@ -42,7 +42,7 @@
 				<li class="breadcrumb-item active">
 					<a class="text-uppercase">
 						<% if(i==0){ %>
-						Inicio
+						
 						<% }else{ %>
 						<%= breadcrumb[i].label %>
 						<% } %>	
@@ -54,7 +54,7 @@
 				<li class="breadcrumb-item">
 					<a class="text-uppercase" href="<%= breadcrumb[i].url %>">
 						<% if(i==0){ %>
-						Inicio
+						
 						<% }else{ %>
 						<%= breadcrumb[i].label %>
 						<% } %>	

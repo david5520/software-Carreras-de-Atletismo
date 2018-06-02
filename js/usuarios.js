@@ -43,7 +43,7 @@ $('#myTableUser tbody').on('click', 'tr', function () {
 });
 
 $('#btn-modU').click(function(){
-	$('#modificarUser').attr("action", "/Usuarios/modificar/"+idUser);
+	$('#modificarUser').attr("action", "/index/Usuarios/modificar/"+idUser);
 	$("#myTableUser tbody tr").removeClass('selected');
 });
 $('#btn-canU').click(function(){

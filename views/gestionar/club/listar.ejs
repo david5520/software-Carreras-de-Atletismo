@@ -31,13 +31,13 @@
                         <td><%= listClub[i]['descripcion'] %></td>
                         <td class="d-flex align-items-center justify-content-center">
 
-                            <form action="/gestionar/club/modificar" class="modiClub" > 
+                            <form action="/index/gestionar/club/modificar" class="modiClub" > 
                                 <input type="hidden" class="club_id" name="club_id" value="<%= listClub[i]['id']%>">
                                 <input type="submit" class="btn btn-primary" href="#editarClubModal" data-toggle="modal" value="Editar" >  
                             </form> 
 
 
-                            <form action="/gestionar/club/eliminar/<%= listClub[i]['id'] %>" class="deleteClub">
+                            <form action="/index/gestionar/club/eliminar/<%= listClub[i]['id'] %>" class="deleteClub">
                                 <button type="submit" class="btn btn-danger" name="delete" onClick="return confirm('¿Quieres eliminar el Club?')">Eliminar</button>
                             </form>
 

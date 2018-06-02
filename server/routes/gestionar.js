@@ -9,7 +9,7 @@ router
 	
 	///CRUD CATEGORIAS
 	//list
-	.get('/gestionar/categoria', (req, res , next) => {
+	.get('/index/gestionar/categoria', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				req.getConnection((err , conexion) => {
@@ -28,7 +28,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.get('/gestionar/categoria/modificar', (req, res , next) => {
+	.get('/index/gestionar/categoria/modificar', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.redirect('/gestionar/categoria')
@@ -39,7 +39,7 @@ router
 		}
 	})
 	//add
-	.get('/gestionar/categoria/crear', (req, res , next) => {
+	.get('/index/gestionar/categoria/crear', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.render('gestionar/categoria/crear')
@@ -49,7 +49,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/gestionar/categoria/crear' , (req, res , next) => {
+	.post('/index/gestionar/categoria/crear' , (req, res , next) => {
 		let categoria = {
 			nombre : req.body.nombre,
 			descripcion : req.body.descripcion,
@@ -122,7 +122,7 @@ router
 		})
 	})
 	//delete
-	.post('/gestionar/categoria/eliminar/:categoria_nombre', (req, res , next) => {
+	.post('/index/gestionar/categoria/eliminar/:categoria_nombre', (req, res , next) => {
 		let categoria_nombre = req.params.categoria_nombre
 		req.getConnection((err , conexion) => {
 			if (err){
@@ -142,7 +142,7 @@ router
 		})
 	})
 	//edit
-	.get('/gestionar/categoria/modificar/:categoria_nombre', (req, res , next) => {
+	.get('/index/gestionar/categoria/modificar/:categoria_nombre', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				let categoria_nombre = req.params.categoria_nombre
@@ -172,7 +172,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/gestionar/categoria/modificar', (req, res , next) => {
+	.post('/index/gestionar/categoria/modificar', (req, res , next) => {
 		let cat_nombre = req.body.cat_nombre
 		req.getConnection((err , conexion) => {
 			if (err){
@@ -191,7 +191,7 @@ router
 			}
 	    })
 	})
-	.post('/gestionar/categoria/modificar/:categoria_nombre', (req, res , next) => {
+	.post('/index/gestionar/categoria/modificar/:categoria_nombre', (req, res , next) => {
 		let categoria = {
 			nombre : req.body.nombre,
 			descripcion : req.body.descripcion,
@@ -269,7 +269,7 @@ router
 
 	///crud de club
 	//list
-	.get('/gestionar/club', (req, res , next) => {
+	.get('/index/gestionar/club', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				req.getConnection((err , conexion) => {
@@ -288,7 +288,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.get('/gestionar/club/modificar', (req, res , next) => {
+	.get('/index/gestionar/club/modificar', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.redirect('/gestionar/club')
@@ -299,7 +299,7 @@ router
 		}
 	})
 	//add
-	.get('/gestionar/club/crear', (req, res , next) => {
+	.get('/index/gestionar/club/crear', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.render('gestionar/club/crear')
@@ -309,7 +309,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/gestionar/club/crear' , (req, res , next) => {
+	.post('/index/gestionar/club/crear' , (req, res , next) => {
 		let club = {
 			nombre : req.body.nombre,
 			descripcion : req.body.descripcion
@@ -359,7 +359,7 @@ router
 		})
 	})
 	//delete
-	.post('/gestionar/club/eliminar/:club_id', (req, res , next) => {
+	.post('/index/gestionar/club/eliminar/:club_id', (req, res , next) => {
 		let club_id = req.params.club_id
 		req.getConnection((err , conexion) => {
 			if (err){
@@ -379,7 +379,7 @@ router
 		})
 	})
 	//edit
-	.post('/gestionar/club/modificar', (req, res , next) => {
+	.post('/index/gestionar/club/modificar', (req, res , next) => {
 		let club_id = req.body.club_id
 		req.getConnection((err , conexion) => {
 			if (err){
@@ -399,7 +399,7 @@ router
 	        
 	    })
 	})
-	.post('/gestionar/club/modificar/:club_id', (req, res , next) => {
+	.post('/index/gestionar/club/modificar/:club_id', (req, res , next) => {
 		let club_id = req.params.club_id
 		let club = {
 			nombre: req.body.nombre, 
@@ -452,7 +452,7 @@ router
 
 
 	//CRUD ATLETAS
-	.get('/gestionar/atleta', (req, res , next) => {
+	.get('/index/gestionar/atleta', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
    				req.getConnection((err , conexion) => {
@@ -487,7 +487,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/gestionar/atleta/modificar', (req, res , next) => {
+	.post('/index/gestionar/atleta/modificar', (req, res , next) => {
 		if (req.session.success = true){
 		let atleta_id = req.body.atleta_id
 		req.getConnection((err , conexion) => {
@@ -512,7 +512,7 @@ router
 			res.render('index')
 		}
 	})
-	.post('/gestionar/atleta/modificar/:atleta_id', (req, res , next) => {
+	.post('/index/gestionar/atleta/modificar/:atleta_id', (req, res , next) => {
 		let atleta_id = req.params.atleta_id
 		let atleta = {
       		primer_nombre : req.body.primer_nombre,
@@ -568,7 +568,7 @@ router
 			}
 		})
 	})
-	.post('/gestionar/atleta/crear' , (req, res , next) => {
+	.post('/index/gestionar/atleta/crear' , (req, res , next) => {
     	let atleta = {
       		primer_nombre : req.body.primer_nombre,
       		segundo_nombre : req.body.segundo_nombre,
@@ -623,7 +623,7 @@ router
       		}
     	})
   	})
-	.post('/gestionar/atleta/eliminar/:atleta_cedula', (req, res , next) => {
+	.post('/index/gestionar/atleta/eliminar/:atleta_cedula', (req, res , next) => {
 		let atleta_cedula = req.params.atleta_cedula
 		req.getConnection((err , conexion) => {
 			if (err){

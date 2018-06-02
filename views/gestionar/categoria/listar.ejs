@@ -33,12 +33,12 @@
                         <td><%= listCategorias[i]['edad_max'] %></td>
                         <td class="d-flex align-items-center justify-content-center">  
 
-                            <form action="/gestionar/categoria/modificar" class="modiCat" > 
+                            <form action="/index/gestionar/categoria/modificar" class="modiCat" > 
                                 <input type="hidden" class="categoria_nombre" name="categoria_nombre" value="<%= listCategorias[i]['nombre'] %>">
                                 <input type="submit" class="btn btn-primary" href="#editarCatModal" data-toggle="modal" value="Editar" >  
                             </form> 
                                    
-                            <form action="/gestionar/categoria/eliminar/<%= listCategorias[i]['nombre'] %>" class="deleteCat">
+                            <form action="/index/gestionar/categoria/eliminar/<%= listCategorias[i]['nombre'] %>" class="deleteCat">
                                 <button type="submit" class="btn btn-danger" name="delete" onClick="return confirm('¿Quieres eliminar la Categoría?')">Eliminar</button>
                             </form>
 

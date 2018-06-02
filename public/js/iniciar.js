@@ -126,7 +126,7 @@ $('#Guardar1').click(function(){
         	    method : 'post', //en este caso
         	    data : JSON.stringify(data), 
         	    contentType: 'application/json',
-                url : '/competencia/agregar-tiempos',
+                url : '/index/competencia/agregar-tiempos',
                 success : function(dataa){
                 	console.log(dataa)
                 	if (dataa.mensaje=='acept') {
@@ -135,7 +135,7 @@ $('#Guardar1').click(function(){
                             title: "Tiempos de atletas Guardados!", 
                             text: "En historial se encuentran los resultados de la competencia", 
                             type: "success" 
-                        }).then(function() { window.location = "/historial";});
+                        }).then(function() { window.location = "/index/historial";});
 			
 					}else{
 			     		alert("Error Conectarse con la Base de Datos");
@@ -156,7 +156,7 @@ $('#btn-ini').click(function(){
     	
 
         $.ajax({
-                url : '/competencia/obtener-competidores-iniciar',
+                url : '/index/competencia/obtener-competidores-iniciar',
                 data : JSON.stringify(data), 
                 method : 'post', //en este caso
                 contentType: 'application/json',

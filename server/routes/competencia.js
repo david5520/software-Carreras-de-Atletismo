@@ -8,7 +8,7 @@ router
 	.use(conexion)
 
 	//CREAR//
-	.get('/competencia/crear', (req, res , next) => {
+	.get('/index/competencia/crear', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.render('competencia/crear-1')
@@ -18,7 +18,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.post('/competencia/crear' , (req, res , next) => {
+	.post('/index/competencia/crear' , (req, res , next) => {
 		req.getConnection((err , conexion) => {
 			if (err != null) {
             	res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
@@ -28,7 +28,7 @@ router
 			})
 		})
 	})
-	.post('/competencia/crear/finalizar' , (req, res , next) => {
+	.post('/index/competencia/crear/finalizar' , (req, res , next) => {
 		req.getConnection((err , conexion) => {
 			if (err){
 				res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
@@ -69,7 +69,7 @@ router
 	})
 
     //LISTAR//
-    .get('/competencia/listar', (req, res, next) => {
+    .get('/index/competencia/listar', (req, res, next) => {
 		if(req.session.success){
 			if (req.session.success = true){
         		req.getConnection((err, conexion) => {
@@ -87,10 +87,10 @@ router
 			res.redirect('..')
 		}
     })
-	.get('/competencia/modificar', (req, res , next) => {
+	.get('/index/competencia/modificar', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
-				res.redirect('/competencia/listar')
+				res.redirect('/index/competencia/listar')
 			}
 		}
 		else{
@@ -99,7 +99,7 @@ router
 	})
 
     //DELETE//
-    .post('/competencia/eliminar/:competencia_id', (req, res, next) => {
+    .post('/index/competencia/eliminar/:competencia_id', (req, res, next) => {
         let competencia_id = req.params.competencia_id
         req.getConnection((err, conexion) => {
         	if (err){
@@ -115,7 +115,7 @@ router
         })
     })
     //EDIT//
-    .get('/competencia/modificar/:competencia_id', (req, res, next) => {
+    .get('/index/competencia/modificar/:competencia_id', (req, res, next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				let competencia_id = req.params.competencia_id
@@ -169,7 +169,7 @@ router
 			res.redirect('..')
 		}
     })
-    .post('/competencia/modificar', (req, res, next) => {
+    .post('/index/competencia/modificar', (req, res, next) => {
     	let competencia_id = req.body.id
         let competencia = {
             nombre: req.body.nombre,
@@ -231,7 +231,7 @@ router
 			}
         })
     })
-    .post('/competencia/agregar-tiempos', (req, res, next) => {
+    .post('/index/competencia/agregar-tiempos', (req, res, next) => {
     	let count = 0
     	req.getConnection((err, conexion) => {
     		if (err){
@@ -266,7 +266,7 @@ router
 			}    		
     	})
     })
-    .post('/competencia/obtener-competidores-iniciar', (req, res, next) => {
+    .post('/index/competencia/obtener-competidores-iniciar', (req, res, next) => {
     	let id_competencia = req.body.id_competencia
     	req.getConnection((err, conexion) => {
     		if (err){
@@ -290,7 +290,7 @@ router
 
 
     //INICIAR//
-    .get('/competencia/iniciar', (req, res, next) => {
+    .get('/index/competencia/iniciar', (req, res, next) => {
 		if(req.session.success){
 			if (req.session.success = true){
         		req.getConnection((err, conexion) => {

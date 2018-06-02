@@ -98,7 +98,7 @@ $('#myTable1 tbody').on('click', 'tr', function () {
 });
 
 $('#btn-mod').click(function(){
-	$('#modificarAtle').attr("action", "/gestionar/atleta/modificar/"+idCompe);
+	$('#modificarAtle').attr("action", "/index/gestionar/atleta/modificar/"+idCompe);
 	$("#myTable1 tbody tr").removeClass('selected');
 });
 $('#btn-can').click(function(){
@@ -110,6 +110,6 @@ $('#btn-can1').click(function(){
 
 $('#editarS').click(function(){
  
-	$('#modificarAtle1').attr("action", "/gestionar/atleta/modificar/"+idCompe);
+	$('#modificarAtle1').attr("action", "/index/gestionar/atleta/modificar/"+idCompe);
 });
 

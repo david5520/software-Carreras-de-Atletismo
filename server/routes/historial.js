@@ -6,7 +6,7 @@ var conexion = require('../conexion'),
 
 router
 	.use(conexion)
-	.get('/historial/detalle-competencia/:id', (req, res , next) => {
+	.get('/index/historial/detalle-competencia/:id', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				let competencia_id = req.params.id 
@@ -87,7 +87,7 @@ router
 			res.redirect('..')
 		}
 	})
-	.get('/historial/detalle-competencia', (req, res , next) => {
+	.get('/index/historial/detalle-competencia', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
 				res.redirect('/historial')

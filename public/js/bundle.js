@@ -194,7 +194,7 @@ $('#myTable1 tbody').on('click', 'tr', function () {
 });
 
 $('#btn-mod').click(function(){
-	$('#modificarAtle').attr("action", "/gestionar/atleta/modificar/"+idCompe);
+	$('#modificarAtle').attr("action", "/index/gestionar/atleta/modificar/"+idCompe);
 	$("#myTable1 tbody tr").removeClass('selected');
 });
 $('#btn-can').click(function(){
@@ -206,16 +206,12 @@ $('#btn-can1').click(function(){
 
 $('#editarS').click(function(){
  
-	$('#modificarAtle1').attr("action", "/gestionar/atleta/modificar/"+idCompe);
+	$('#modificarAtle1').attr("action", "/index/gestionar/atleta/modificar/"+idCompe);
 });
 
 
 },{}],3:[function(require,module,exports){
 
-$(document).ready(function() {
-    $('#loginModal').modal('show');
-   
-});
 },{}],4:[function(require,module,exports){
 
 
@@ -306,7 +302,7 @@ $("#crearCompe").submit(function (event) {
                             title: "Buen trabajo!", 
                             text: "Competencia " + datos.nombre + " Creada", 
                             type: "success" 
-                        }).then(function() { window.location = "/competencia/iniciar"; });
+                        }).then(function() { window.location = "/index/competencia/iniciar"; });
                     } else {
                         alert("Error Conectarse con la Base de Datos");
                     }
@@ -373,7 +369,7 @@ $("#editCompe").submit(function (event) {
                             title: "Buen trabajo!", 
                             text: "Competencia " + datos.nombre + " Modificada", 
                             type: "success" 
-                        }).then(function() { window.location = "/competencia/modificar"; });
+                        }).then(function() { window.location = "/index/competencia/modificar"; });
                     } else {
                         alert("Error Conectarse con la Base de Datos");
                     }
@@ -418,7 +414,7 @@ $("#crearClub").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Club " + datos.nombre + " Creado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/club"; });
+                }).then(function() { window.location = "/index/gestionar/club"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -446,7 +442,7 @@ $(".modiClub").submit(function (event) {
         urlpost = $form.attr("action");
 
 
-    $('#editClub').attr("action", "/gestionar/club/modificar/"+datos.club_id);
+    $('#editClub').attr("action", "/index/gestionar/club/modificar/"+datos.club_id);
 
     $.ajax({
         type: 'POST',
@@ -496,7 +492,7 @@ $("#editClub").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Club " + datos.nombre + " Modificado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/club"; });
+                }).then(function() { window.location = "/index/gestionar/club"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -531,7 +527,7 @@ $(".deleteClub").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Club Eliminado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/club"; });
+                }).then(function() { window.location = "/index/gestionar/club"; });
                 
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -576,7 +572,7 @@ $("#crearCat").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Categoria " + datos.nombre + " Creada", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/categoria"; });
+                }).then(function() { window.location = "/index/gestionar/categoria"; });
                
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -605,7 +601,7 @@ $(".modiCat").submit(function (event) {
 
         urlpost = $form.attr("action");
 
-    $('#editCat').attr("action", "/gestionar/categoria/modificar/"+datos.cat_nombre);
+    $('#editCat').attr("action", "/index/gestionar/categoria/modificar/"+datos.cat_nombre);
 
     $.ajax({
         type: 'POST',
@@ -660,7 +656,7 @@ $("#editCat").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Categoria " + datos.nombre + " Modificado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/categoria"; });
+                }).then(function() { window.location = "/index/gestionar/categoria"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -695,7 +691,7 @@ $(".deleteCat").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Categoria Eliminada", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/categoria"; });
+                }).then(function() { window.location = "/index/gestionar/categoria"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -742,7 +738,7 @@ $("#crearAtleta").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "El Atleta " + datos.primer_nombre + " Creado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/atleta"; });     
+                }).then(function() { window.location = "/index/gestionar/atleta"; });     
               
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -785,7 +781,7 @@ $("#modificarAtle").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Atleta " + datos.primer_nombre + " Modificado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/atleta"; });
+                }).then(function() { window.location = "/index/gestionar/atleta"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -855,7 +851,7 @@ $(".eliminarAtle").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Atleta Eliminado", 
                     type: "success" 
-                }).then(function() { window.location = "/gestionar/atleta"; }); 
+                }).then(function() { window.location = "/index/gestionar/atleta"; }); 
                 
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -902,7 +898,7 @@ $("#crearUsuario").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "El Usuario " + datos.nombre + " Creado", 
                     type: "success" 
-                }).then(function() { window.location = "/Usuarios"; });     
+                }).then(function() { window.location = "/index/Usuarios"; });     
               
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -944,7 +940,7 @@ $("#modificarUser").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Usuario " + datos.nombre + " Modificado", 
                     type: "success" 
-                }).then(function() { window.location = "/Usuarios"; });
+                }).then(function() { window.location = "/index/Usuarios"; });
             } else {
                 alert("Error Conectarse con la Base de Datos");
             }
@@ -1012,7 +1008,7 @@ $(".eliminarUser").submit(function (event) {
                     title: "Buen trabajo!", 
                     text: "Usuario Eliminado", 
                     type: "success" 
-                }).then(function() { window.location = "/Usuarios"; }); 
+                }).then(function() { window.location = "/index/Usuarios"; }); 
                 
             } else {
                 alert("Error Conectarse con la Base de Datos");
@@ -1052,39 +1048,27 @@ $("#Login").submit(function (event) {
 
                 if (data.dataUser.permisologia == 1) {
                     
-                    $(document).ready(function() {
-                        $("#loginModal").modal('toggle');
-                     
-                     //$("#Cerrar1").show();
-                    
-                    });
                     swal({ 
                     title: "", 
                     text: "Bienvenido "+ data.dataUser.nombre +" "+ data.dataUser.apellido , 
                     type: "success" 
-                    }) 
-                   
-
-                    // Check browser support
-                        if (typeof(Storage) !== "undefined") {
-                     // Store
-                        sessionStorage.setItem("lastname", data.dataUser.nombre );
-                    // Retrieve
-                        document.getElementById("result").innerHTML = sessionStorage.getItem("lastname");
-                        } else {
-                        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-                        }
-
+                    }).then(function() { window.location = "/index"; }); 
                 
                 }
                 else {
-                     $(document).ready(function() {
-                     $("#loginModal").modal('toggle');
-                     $("#User1").hide();
-                     //$("#Cerrar1").show();
-   
-                    });
-                    
+                        $(document).ready(function() {
+                            $("User1").hide();
+                            console.log('aja')
+        
+        
+                        });
+                    swal({ 
+                    title: "", 
+                    text: "Bienvenido "+ data.dataUser.nombre +" "+ data.dataUser.apellido , 
+                    type: "success" 
+                    }).then(function() { window.location = "/index"; }); 
+
+
                 }
 
               
@@ -1104,38 +1088,7 @@ $("#Login").submit(function (event) {
 
 });
 
-/// CERRAR SESION
 
-
-$("#Cerrar").submit(function (event) {
-
-    // Stop form from submitting normally
-    event.preventDefault();
-    // Get some values from elements on the page:
-    var $form = $(this),
-        datos = {}
-        urlpost = $form.attr("action");
-
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(datos),
-        contentType: 'application/json',
-        url: urlpost,
-        success: function (data) {
-        console.log(JSON.stringify(data));
-            if (data.mensaje == 'acept') {
-                console.log('ceeeee')
-
-                 window.location = "....";
-              
-            } else {
-                alert("Error Conectarse con la Base de Datos");
-            }
-        }
-
-    });
-
-});
 },{}],5:[function(require,module,exports){
 
 var table = $('#myTableUser').DataTable({
@@ -1182,7 +1135,7 @@ $('#myTableUser tbody').on('click', 'tr', function () {
 });
 
 $('#btn-modU').click(function(){
-	$('#modificarUser').attr("action", "/Usuarios/modificar/"+idUser);
+	$('#modificarUser').attr("action", "/index/Usuarios/modificar/"+idUser);
 	$("#myTableUser tbody tr").removeClass('selected');
 });
 $('#btn-canU').click(function(){
@@ -1193,4 +1146,4 @@ $('#btn-canU1').click(function(){
 });
 
 
-},{}]},{},[1,2,4,5,3]);
+},{}]},{},[1,2,4,3,5]);

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>IDT - Atletismo</title>
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="datatables/datatables.min.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/sweetalert2.min.css" rel="stylesheet">
+
+
+	</head>
+
+	<body>
+
+		<header>
+				<div class="container">
+				<div class="row text-center align-items-center">
+					<div class="col-12 col-md-5">
+						<a href="/"><img src="img/idt.png" alt="Logo IDT"></a>
+					</div>
+					<div class="col-12 col-md-7" id="Bienvenido">
+						<h1>Sistema de Atletismo</h1>
+					</div>
+					
+				
+				</div>
+
+				</div>
+
+		</header>
+
+
+<div class="section-center d-flex align-items-center justify-content-center flex-column content-index">
+
+	<div class="title text-center">
+		<h1>IDT</h1>
+		<h1>ATLETISMO</h1>
+	</div>
+
+	<div class="container">
+	
+				<form class="text-center" action="/Usuarios/login" method="post" id="Login">
+					<div class="d-flex align-items-center justify-content-center ">
+						<h3 class="modal-title">Login</h3>
+						
+					
+					</div>
+	
+				
+	
+					<div class="modal-body">
+	
+						<div class="form-group row align-items-center">
+							<label for="usuario" class="col-md-4 col-form-label">Usuario:</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="nombre_usuario" placeholder="Usuario" required>
+							</div>
+						</div>
+	
+						<div class="form-group row align-items-center">
+							<label for="contraseña" class="col-md-4 col-form-label">Contraseña:</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="clave" placeholder="Contraseña" required>
+							</div>
+						</div>
+	
+					</div>
+	
+					
+					<div class="modal-footer"></div>
+						<button type="submit" class="btn btn-success btn-lg ">Entrar</button>
+						
+					</div>
+	
+				</form>
+		
+	</div>
+
+	
+		
+
+<% include partials/foot %>

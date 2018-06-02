@@ -47,11 +47,11 @@
 					<td><%=dataAtletas[i]['nombre_club'] %></td>
 
 					<td class="d-flex align-items-center justify-content-center">
-						<form action="/gestionar/atleta/modificar" class="modiAtle" > 
+						<form action="/index/gestionar/atleta/modificar" class="modiAtle" > 
 							<input type="hidden" id="atleta_id" name="atleta_id" value="<%= dataAtletas[i]['id']%>">
 							<input type="submit" class="btn btn-primary" href="#atletamodificar" data-toggle="modal" id="editarS" value="Editar" >  
 						</form>  
-						<form  method="post" action="/gestionar/atleta/eliminar/<%= dataAtletas[i]['cedula'] %>" class="eliminarAtle" > 
+						<form  method="post" action="/index/gestionar/atleta/eliminar/<%= dataAtletas[i]['cedula'] %>" class="eliminarAtle" > 
 							<button type="submit" class="btn btn-danger" name="delete"  onClick="return confirm('¿Quieres eliminar el Atleta?')">Eliminar</button>
 						</form>
 					</td>

@@ -35,7 +35,6 @@ router
 									(err) ? reject(new Error('Error al consultar la base de datos')) : resolve(rows)
 								})
 							})
-							res.render('historial/detalle-competencia', data)
 						})
 						.then((categorias) => {
 							let premios = {}
@@ -75,6 +74,8 @@ router
 						})
 						.then((data) => {
             		        var lodash = require('lodash')
+            		        console.log(dataView)
+            		        console.log(dataPremiacion)
 							res.render('historial/detalle-competencia', {dataDetalle : dataView , dataPremiacion : data, _ : lodash })
 						})
 						.catch((err) =>{

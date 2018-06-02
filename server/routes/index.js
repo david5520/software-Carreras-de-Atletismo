@@ -17,14 +17,7 @@ router
 	.get('/index', (req, res , next) => {
 		if(req.session.success){
 			if (req.session.success = true){
-				req.getConnection((err , conexion) => {
-					if (err != null) {
-            			res.render('error', {mensaje : 'Error al conectarse a la base de datos' , code : 404})
-            		}
-					conexion.query(`SELECT usu.nombre AS nombre, usu.apellido AS apellido, usu.email AS email, usu.sexo AS sexo, DATE_FORMAT(usu.fecha_nacimiento,'%Y-%m-%d') as fecha_nacimiento, usu.nombre_usuario AS nombre_usuario, usu.clave AS clave, usu.id AS id, usu.permisologia AS permisologia FROM usuario usu LEFT JOIN permisologia per ON per.id=usu.permisologia` , (err , usuarios) =>{
-						(err) ? res.render('error', {mensaje : 'Error al consultar la base de datos' , code : 404}) : res.render('index',{dataUsuarios: usuarios})
-					})
-				})
+				res.render('index',{dataUser : (req.session.success) ? ((req.session.success) == true ? req.session.userData : null) : null})
 			}
 		}
 		else{
